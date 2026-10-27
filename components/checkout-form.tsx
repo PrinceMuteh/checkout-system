@@ -208,8 +208,8 @@ export default function CheckoutForm({ initialAmount }: Props) {
         </div>
 
         <label>
-          <span>Email address</span>
-          <input name="email" type="email" autoComplete="email" placeholder="john@example.com" required />
+          <span>Email address or customer reference</span>
+          <input name="email" type="text" placeholder="FLEX0001" required />
         </label>
 
         <label>
