@@ -1,0 +1,82 @@
+<!-- With Callback Function -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SafeHaven Checkout Demo</title>
+  </head>
+  <body>
+    <h1>Checkout Demo - With Callback Function</h1>
+    <button onclick="payWithSafeHaven()">Click Me!</button>
+    
+    <script src="https://checkout.safehavenmfb.com/assets/checkout.min.js"></script>
+    <script type="text/javascript">
+    	let payWithSafeHaven = () => {
+            let checkOut = SafeHavenCheckout({
+                environment: "sandbox", //sandbox || production
+                clientId: "be36de69b09635ab7577d28747e79b3c",
+                referenceCode: ''+Math.floor((Math.random() * 1000000000) + 1),
+                customer: {
+                    firstName: "John",
+                    lastName: "Doe",
+                    emailAddress: "johndoe@example.com",
+                    phoneNumber: "+2348032273616"
+                },
+                currency: "NGN", // Must be NGN
+                amount: 100,
+  	            feeBearer: "customer", // account = We charge you, customer = We charge the customer
+                settlementAccount: {
+                    bankCode: "999240", // 999240 = Sandbox || 090286 = Production
+                    accountNumber: "0117964837"
+                },
+	              //webhookUrl: "",
+                //customIconUrl: "https://safehavenmfb.com/assets/images/logo1.svg",
+              	//metadata: { "foo": "bar" },
+              	onClose: () => { console.log("Checkout Closed") },
+              	callback: (response) => { console.log(response) }
+            });
+        }
+    </script>
+  </body>
+</html>
+
+<!-- 
+
+{
+  "type": "virtualAccount.transfer",
+  "data": {
+    "_id": "694458d00e78440024c85b57",
+    "client": "694038178a10d9002451726c",
+    "virtualAccount": "694458100e78440024c85b06",
+    "sessionId": "999240251218194102908914390592",
+    "nameEnquiryReference": "999240251218194022659891835360",
+    "paymentReference": "999240251218194102908914390592",
+    "isReversed": false,
+    "reversalReference": "",
+    "provider": "BANK",
+    "providerChannel": "TRANSFER",
+    "providerChannelCode": "IBS",
+    "destinationInstitutionCode": "999240",
+    "creditAccountName": "MyTest Checkout",
+    "creditAccountNumber": "6020039264",
+    "creditBankVerificationNumber": null,
+    "creditKYCLevel": "3",
+    "debitAccountName": "MYTEST",
+    "debitAccountNumber": "0110135610",
+    "debitBankVerificationNumber": null,
+    "debitKYCLevel": "3",
+    "transactionLocation": "9.0932,7.4429",
+    "narration": "",
+    "amount": 1005,
+    "fees": 5.03,
+    "vat": 0,
+    "stampDuty": 0,
+    "responseCode": "00",
+    "responseMessage": "Approved or completed successfully",
+    "status": "Completed",
+    "isDeleted": false,
+    "createdAt": "2025-12-18T19:41:04.324Z",
+    "declinedAt": "2025-12-18T19:41:04.324Z",
+    "updatedAt": "2025-12-18T19:41:04.936Z",
+    "__v": 0
+  }
+} -->
